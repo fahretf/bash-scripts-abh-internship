@@ -6,4 +6,10 @@ if ! command -v dig &> /dev/null; then
   exit 1
 fi
 
-dig www.atlantbh.com | awk '/Query time/ {print $4 " " $5}'
+echo "--------------------"
+for domen in "$@"; do  
+  res=$(dig "$domen" | awk '/Query time/ {print $4 " " $5}')
+  echo "$domen - $res"
+done
+echo "--------------------"
+
